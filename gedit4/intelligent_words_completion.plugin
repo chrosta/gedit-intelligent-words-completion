@@ -1,0 +1,9 @@
+[Plugin]
+Loader=python3
+Module=intelligent_words_completion
+IAge=3
+Name=Intelligent Words Completion
+Description=This plugin intelligently completes your input of tags, lists, brackets, comments, quotes and words.
+Authors=???
+Copyright=???
+Website=???
