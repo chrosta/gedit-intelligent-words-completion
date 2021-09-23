@@ -1,7 +1,7 @@
 Intelligent words completion for Gedit
 ======================================
 
-This plugin tries to make your life more comfortable by automatically adding text that you probably would have typed anyway. The project is forked from [this project](https://github.com/nymanjens/gedit-intelligent-text-completion) and extends it mainly by adding words via CTLR + SPCE keys.
+This plugin tries to make your life more comfortable by automatically adding text that you probably would have typed anyway. The project is forked from [this project](https://github.com/nymanjens/gedit-intelligent-text-completion) and extends it mainly by adding words via CTLR + SPACE keys.
 
 ## Features:
   * Auto-close brackets and quotes.
