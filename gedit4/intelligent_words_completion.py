@@ -26,6 +26,7 @@ class IntelligentWordsCompletionPlugin(GObject.Object, Gedit.WindowActivatable, 
         self._words = []
         self._prefix = ""
         self._postfix = ""
+        self._backspace = 0
 
     def do_create_configure_widget(self):
         return IntelligentTextCompletionOptions.get_instance().create_configure_dialog()
@@ -94,9 +95,24 @@ class IntelligentWordsCompletionPlugin(GObject.Object, Gedit.WindowActivatable, 
     def _on_view_key_press_event(self, view, event, window):
         doc = window.get_active_document()
         #--
+        # Backspace for quick deletion when word was completed!
+        #--
+        if event.get_keycode().keycode == 22: # BACKSPACE
+            print("-->" + str(event.get_keycode().keycode))
+            if self._backspace > 0:
+                cursor = doc.get_iter_at_mark(doc.get_insert())
+                offset = cursor.get_line_offset()
+                copy = cursor.copy()
+                copy.set_line_offset(offset - (self._backspace - 1))
+                doc.delete_interactive(cursor, copy, True)
+                self._backspace = 0
+        else:
+            self._backspace = 0
+        #--
         # Starting word completion after CTRL+SPACE pressed!
         #--
-        if (event.state == Gdk.ModifierType.CONTROL_MASK):
+        if event.state == Gdk.ModifierType.CONTROL_MASK:
+            print("-->" + str(event.get_keycode().keycode))
             if event.get_keycode().keycode == 65: # CTRL+SPACE
                 if len(self._words) == 0:
                     self._index = 0
@@ -194,6 +210,7 @@ class IntelligentWordsCompletionPlugin(GObject.Object, Gedit.WindowActivatable, 
                     doc.insert(cursor, postfix, len(self._postfix))
                     cursor = doc.get_iter_at_mark(doc.get_insert())
                     cursor.set_line_offset((cursor.get_line_offset() - len(self._postfix)))
+                    self._backspace = len(self._postfix)
                     doc.place_cursor(cursor)
                     #==
         try:

@@ -10,6 +10,7 @@ This plugin tries to make your life more comfortable by automatically adding tex
   * Auto-indent after function or list.
   * Cycling by possible words to completion by CTRL+SPACE (and CTRL release).
   * Words are parsed and readed from all opened tabs.
+  * First BACKSPACE key after word completion delete completed part of word.
 
 ## Download and instalation:
   * Download and place `.plugin` and `.py` file typicaly into `~/.local/share/gedit/plugins/`. 
